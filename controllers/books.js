@@ -15,7 +15,9 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
 
+    console.log(req.body);
     req.body.imageURL = req.body.imageURL || undefined
+    console.log(req.body); 
   
     db.Book.create(req.body)
     .then(() => {
@@ -80,14 +82,16 @@ router.delete('/:id', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
-  
+  console.log("***PUT-METHOD***");
     // get the ID   
-    const id = req.params.id       
-
+    const id = req.params.id
+    console.log(id); 
+    console.log(req.body);
     req.body.imageURL = req.body.imageURL || undefined
-        
+    console.log(req.body);    
     db.Book.findByIdAndUpdate(id, req.body).orFail()
         .then(o => {
+          console.log("***findByIdAndUpdate-then***");
             console.log("book", o);
           res.redirect(`/books/${id}`);          
         })

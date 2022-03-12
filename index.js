@@ -1,6 +1,8 @@
 const express = require('express')
+var cors = require('cors')
 
 const app = express()
+app.use(cors())
 
 require('dotenv').config()
 
@@ -31,7 +33,9 @@ app.get('/count/:ceiling',(req,res) => {
 
     res.send(`<h1>${message}</h1>`);
 })
-
+const bp = require('body-parser')
+app.use(bp.json())
+app.use(bp.urlencoded({ extended: true }))
 app.use(express.urlencoded({ extended: true }))
 
 //PLACES CONTROLLER LOCATION
